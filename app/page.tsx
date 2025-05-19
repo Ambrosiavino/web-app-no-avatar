@@ -12,8 +12,14 @@ export default function Home() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ message: input }),
     });
+
+    if (!res.ok) {
+      setResponse("Errore nella risposta dell'API");
+      return;
+    }
+
     const data = await res.json();
-    setResponse(data.reply);
+    setResponse(data.reply || "Nessuna risposta");
   }
 
   return (
@@ -40,4 +46,5 @@ export default function Home() {
     </main>
   );
 }
+
 
